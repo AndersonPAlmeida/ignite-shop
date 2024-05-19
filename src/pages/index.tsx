@@ -1,13 +1,10 @@
 import { HomeContainer, Product } from "../styles/pages/home"
 import { useKeenSlider } from 'keen-slider/react'
 import { stripe } from "../lib/stripe"
-import { GetServerSideProps } from "next"
+import { GetStaticProps } from "next"
 
 import Stripe from "stripe"
 import Image from "next/image"
-import camiseta1 from '../assets/camisetas/cam1.png'
-import camiseta2 from '../assets/camisetas/cam2.png'
-import camiseta3 from '../assets/camisetas/cam3.png'
 
 import 'keen-slider/keen-slider.min.css'
 
@@ -31,7 +28,10 @@ export default function Home({ products }: HomeProps) {
     <HomeContainer ref={sliderRef} className="keen-slider">
       {products.map(product => {
         return (
-          <Product key={product.id} className="keen-slider__slide">
+          <Product 
+            key={product.id} 
+            href={`/product/${product.id}`} className="keen-slider__slide"
+          >
             <Image src={product.imageUrl} width={520} height={520} alt=""/>
 
             <footer>
@@ -45,7 +45,7 @@ export default function Home({ products }: HomeProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await stripe.products.list({
     expand: ['data.default_price']
   })
@@ -57,13 +57,17 @@ export const getServerSideProps: GetServerSideProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: price.unit_amount / 100,
+      price: new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format(price.unit_amount / 100),
     }
   })
   
   return {
     props: {
       products
-    }
+    },
+    revalidate: 60 * 60 * 2 , // 2 hours
   }
 }
