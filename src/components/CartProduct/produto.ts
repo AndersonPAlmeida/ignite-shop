@@ -1,4 +1,4 @@
-import { styled } from "../../styles";
+import { styled } from '../../styles'
 
 export const ProductContainer = styled('div', {
   width: '30rem',
@@ -14,7 +14,7 @@ export const ProductContainer = styled('div', {
   flexDirection: 'column',
   gap: '2.5rem',
   padding: '3rem',
-  
+
   header: {
     display: 'flex',
     alignItems: 'center',
@@ -30,7 +30,7 @@ export const ProductContainer = styled('div', {
       color: '$gray400',
       backgroundColor: 'transparent',
       transition: 'all 0.5s ease-in-out',
-      
+
       border: '2px solid transparent',
       borderRadius: '6px',
 
@@ -42,9 +42,9 @@ export const ProductContainer = styled('div', {
 
       '&:hover': {
         borderColor: '$gray900',
-      }
-    }
-  }
+      },
+    },
+  },
 })
 
 export const CartItems = styled('div', {
@@ -65,9 +65,9 @@ export const PurchaseDetails = styled('div', {
       fontSize: '1rem',
     },
 
-     strong: {
+    strong: {
       fontSize: '$xl',
-     }
+    },
   },
 
   button: {
@@ -84,10 +84,10 @@ export const PurchaseDetails = styled('div', {
     color: '$white',
     fontSize: '$md',
 
-    "&:hover": {
+    '&:hover': {
       backgroundColor: '$green300',
-    }
-  }
+    },
+  },
 })
 
 export const Details = styled('div', {

@@ -1,4 +1,4 @@
-import { styled } from "..";
+import { styled } from '..'
 
 export const Container = styled('div', {
   display: 'flex',
@@ -13,7 +13,7 @@ export const Header = styled('header', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  
+
   padding: '2rem 1rem 2rem',
   width: '100%',
   maxWidth: 1180,

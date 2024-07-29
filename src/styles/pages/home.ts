@@ -1,5 +1,5 @@
-import { styled } from "..";
-import Link from "next/link";
+import { styled } from '..'
+import Link from 'next/link'
 
 export const HomeContainer = styled('main', {
   display: 'flex',
@@ -16,7 +16,7 @@ export const Product = styled(Link, {
   position: 'relative',
   overflow: 'hidden',
   minWidth: 540,
-  
+
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -49,8 +49,8 @@ export const Product = styled(Link, {
     footer: {
       transform: 'translateY(0%)',
       opacity: 1,
-    }
-  }
+    },
+  },
 })
 
 export const ItemDetails = styled('span', {
@@ -66,5 +66,5 @@ export const ItemDetails = styled('span', {
     fontSize: '$xl',
     fontWeight: 'bold',
     color: '$green300',
-  }
+  },
 })

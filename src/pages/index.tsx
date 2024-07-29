@@ -1,15 +1,15 @@
-import { HomeContainer, ItemDetails, Product } from "../styles/pages/home"
+import { HomeContainer, ItemDetails, Product } from '../styles/pages/home'
 import { useKeenSlider } from 'keen-slider/react'
-import { stripe } from "../lib/stripe"
-import { GetStaticProps } from "next"
+import { stripe } from '../lib/stripe'
+import { GetStaticProps } from 'next'
 
-import Stripe from "stripe"
-import Image from "next/image"
+import Stripe from 'stripe'
+import Image from 'next/image'
 
 import 'keen-slider/keen-slider.min.css'
-import Head from "next/head"
-import { Cart } from "../styles/pages/cart"
-import { Bag } from "@phosphor-icons/react"
+import Head from 'next/head'
+import { Cart } from '../styles/pages/cart'
+import { Bag } from '@phosphor-icons/react'
 
 interface HomeProps {
   products: {
@@ -24,7 +24,7 @@ export default function Home({ products }: HomeProps) {
     slides: {
       perView: 2.5,
       spacing: 48,
-    }
+    },
   })
 
   return (
@@ -33,11 +33,12 @@ export default function Home({ products }: HomeProps) {
         <title>Home | Ignite Shop</title>
       </Head>
       <HomeContainer ref={sliderRef} className="keen-slider">
-        {products.map(product => {
+        {products.map((product) => {
           return (
             <Product
               key={product.id}
-              href={`/product/${product.id}`} className="keen-slider__slide"
+              href={`/product/${product.id}`}
+              className="keen-slider__slide"
               prefetch={false}
             >
               <Image src={product.imageUrl} width={520} height={520} alt="" />
@@ -47,8 +48,8 @@ export default function Home({ products }: HomeProps) {
                   <strong>{product.name}</strong>
                   <span>{product.price}</span>
                 </ItemDetails>
-                <Cart variant='shopItemAdd'>
-                  <Bag size={32} weight="bold"/>
+                <Cart variant="shopItemAdd">
+                  <Bag size={32} weight="bold" />
                 </Cart>
               </footer>
             </Product>
@@ -61,10 +62,10 @@ export default function Home({ products }: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const response = await stripe.products.list({
-    expand: ['data.default_price']
+    expand: ['data.default_price'],
   })
 
-  const products = response.data.map(product => {
+  const products = response.data.map((product) => {
     const price = product.default_price as Stripe.Price
 
     return {
@@ -80,7 +81,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      products
+      products,
     },
     revalidate: 60 * 60 * 2, // 2 hours
   }
