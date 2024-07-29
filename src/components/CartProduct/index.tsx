@@ -1,5 +1,10 @@
-import { X } from "@phosphor-icons/react";
-import { CartItems, Details, ProductContainer, PurchaseDetails } from "./produto";
+import { X } from '@phosphor-icons/react'
+import {
+  CartItems,
+  Details,
+  ProductContainer,
+  PurchaseDetails,
+} from './produto'
 
 export function CartProduct() {
   return (
@@ -21,9 +26,9 @@ export function CartProduct() {
           </Details>
 
           <Details>
-            <span style={{alignSelf: 'flex-end'}}>3 itens</span>
+            <span style={{ alignSelf: 'flex-end' }}>3 itens</span>
             <strong>R$ 270,00</strong>
-          </Details>    
+          </Details>
         </div>
 
         <button>Finalizar compra</button>

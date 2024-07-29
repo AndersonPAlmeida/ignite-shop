@@ -1,4 +1,4 @@
-import { styled } from "..";
+import { styled } from '..'
 
 export const Cart = styled('button', {
   display: 'flex',
@@ -8,7 +8,7 @@ export const Cart = styled('button', {
   width: '3rem',
   height: '3rem',
   padding: '0.75rem',
- 
+
   border: '0',
   borderRadius: '6px',
   cursor: 'pointer',
@@ -23,26 +23,25 @@ export const Cart = styled('button', {
 
         '&:disabled': {
           color: '$gray400',
-          cursor: 'not-allowed'
+          cursor: 'not-allowed',
         },
       },
       shopItemAdd: {
         backgroundColor: '$green500',
-      }
-    }
+      },
+    },
   },
-  'div': {
+  div: {
     position: 'absolute',
     top: '-9px',
     right: '-9px',
     padding: '2px',
     backgroundColor: '$gray900',
-    borderRadius: '100%'
-  }
+    borderRadius: '100%',
+  },
 })
 
 export const ItemAddQtd = styled('span', {
-  
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -54,5 +53,5 @@ export const ItemAddQtd = styled('span', {
   backgroundColor: '$green500',
   color: '$white',
 
-  borderRadius: '100%'
+  borderRadius: '100%',
 })
