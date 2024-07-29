@@ -1,4 +1,4 @@
-import { HomeContainer, Product } from "../styles/pages/home"
+import { HomeContainer, ItemDetails, Product } from "../styles/pages/home"
 import { useKeenSlider } from 'keen-slider/react'
 import { stripe } from "../lib/stripe"
 import { GetStaticProps } from "next"
@@ -8,6 +8,8 @@ import Image from "next/image"
 
 import 'keen-slider/keen-slider.min.css'
 import Head from "next/head"
+import { Cart } from "../styles/pages/cart"
+import { Bag } from "@phosphor-icons/react"
 
 interface HomeProps {
   products: {
@@ -33,16 +35,21 @@ export default function Home({ products }: HomeProps) {
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map(product => {
           return (
-            <Product 
-              key={product.id} 
+            <Product
+              key={product.id}
               href={`/product/${product.id}`} className="keen-slider__slide"
               prefetch={false}
             >
-              <Image src={product.imageUrl} width={520} height={520} alt=""/>
+              <Image src={product.imageUrl} width={520} height={520} alt="" />
 
               <footer>
-                <strong>{product.name}</strong>
-                <span>{product.price}</span>
+                <ItemDetails>
+                  <strong>{product.name}</strong>
+                  <span>{product.price}</span>
+                </ItemDetails>
+                <Cart variant='shopItemAdd'>
+                  <Bag size={32} weight="bold"/>
+                </Cart>
               </footer>
             </Product>
           )
@@ -70,11 +77,11 @@ export const getStaticProps: GetStaticProps = async () => {
       }).format(price.unit_amount / 100),
     }
   })
-  
+
   return {
     props: {
       products
     },
-    revalidate: 60 * 60 * 2 , // 2 hours
+    revalidate: 60 * 60 * 2, // 2 hours
   }
 }
