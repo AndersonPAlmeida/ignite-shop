@@ -23,6 +23,7 @@ export const Cart = styled('button', {
 
         '&:disabled': {
           color: '$gray400',
+          cursor: 'not-allowed'
         },
       },
       shopItemAdd: {
