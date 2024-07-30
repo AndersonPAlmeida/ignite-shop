@@ -1,10 +1,14 @@
 import { X } from '@phosphor-icons/react'
 import {
+  CartItem,
   CartItems,
   Details,
+  ProductCartDetails,
+  ProductCartImage,
   ProductContainer,
   PurchaseDetails,
 } from './produto'
+import Image from 'next/image'
 
 export function CartProduct() {
   return (
@@ -17,7 +21,24 @@ export function CartProduct() {
         </button>
       </header>
 
-      <CartItems>oi</CartItems>
+      <CartItems>
+        <CartItem>
+          <ProductCartImage>
+            <Image
+              src="https://files.stripe.com/links/MDB8YWNjdF8xUEhyMnZJdU14ZmNMTkF5fGZsX3Rlc3RfMGR3WjFibmdOa3ZrN1Rjcm5XMDluOXZC00FbWbIGop"
+              alt="imagem do item adicionado ao carrinho"
+              width={100}
+              height={100}
+            />
+          </ProductCartImage>
+
+          <ProductCartDetails>
+            <span>Camiseta Beyond the Limits</span>
+            <strong>R$ 79,90</strong>
+            <button>Remover</button>
+          </ProductCartDetails>
+        </CartItem>
+      </CartItems>
       <PurchaseDetails>
         <div>
           <Details>

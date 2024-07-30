@@ -31,6 +31,7 @@ export const Cart = styled('button', {
       },
     },
   },
+
   div: {
     position: 'absolute',
     top: '-9px',
@@ -38,6 +39,10 @@ export const Cart = styled('button', {
     padding: '2px',
     backgroundColor: '$gray900',
     borderRadius: '100%',
+  },
+
+  '&:not(:disabled):hover': {
+    boxShadow: '0 0 10px rgba(255, 255, 255, 0.7)', // Adiciona efeito de brilho
   },
 })
 

@@ -49,6 +49,76 @@ export const ProductContainer = styled('div', {
 
 export const CartItems = styled('div', {
   flex: 1,
+  maxHeight: 'calc(100vh - 372px)',
+  overflowY: 'auto',
+
+  '> div:not(:last-child)': {
+    marginBottom: '1rem',
+  },
+
+  '&::-webkit-scrollbar': {
+    width: '8px', // Largura da barra de rolagem
+  },
+  '&::-webkit-scrollbar-thumb': {
+    backgroundColor: 'transparent', // Fundo semi-transparente para o polegar
+    borderRadius: '4px', // Bordas arredondadas para o polegar
+  },
+  '&::-webkit-scrollbar-track': {
+    backgroundColor: 'transparent', // Fundo transparente para a trilha
+  },
+
+  // Estilos para navegadores Firefox
+  '&': {
+    scrollbarWidth: 'thin', // Largura fina da barra de rolagem
+    scrollbarColor: 'transparent transparent', // Cor do polegar e da trilha
+  },
+})
+
+export const CartItem = styled('div', {
+  display: 'flex',
+  alignItems: 'flex-start',
+  gap: '1.25rem',
+  maxHeight: '100px',
+  height: '100px',
+})
+
+export const ProductCartImage = styled('div', {
+  background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
+  borderRadius: 8,
+
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  img: {
+    objectFit: 'fill',
+  },
+})
+
+export const ProductCartDetails = styled('div', {
+  height: '100%',
+
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+
+  fontSize: '$md',
+  color: '$gray300',
+
+  button: {
+    border: 0,
+    backgroundColor: 'transparent',
+    fontSize: '$md',
+    color: '$green500',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'flex-start',
+    transition: 'all 0.5s ease-in-out',
+
+    '&:hover': {
+      color: '$green300',
+    },
+  },
 })
 
 export const PurchaseDetails = styled('div', {
@@ -83,6 +153,7 @@ export const PurchaseDetails = styled('div', {
 
     color: '$white',
     fontSize: '$md',
+    cursor: 'pointer',
 
     '&:hover': {
       backgroundColor: '$green300',
