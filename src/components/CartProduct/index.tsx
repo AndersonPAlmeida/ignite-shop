@@ -9,12 +9,25 @@ import {
   PurchaseDetails,
 } from './cartProduct'
 import Image from 'next/image'
+import { useCart } from '../../data/hooks/useCart'
+import { CartItem as item } from '../../data/model/CartItem'
 
 export interface CartProductProps {
   onToggle: () => void
 }
 
 export function CartProduct({ onToggle }: CartProductProps) {
+  const { items, quantityItems, totalPurchasePrice, removeItemCart } = useCart()
+
+  function handleRemoveItemCart(idItem: string) {
+    removeItemCart(idItem)
+
+    console.log('itens', quantityItems)
+
+    if (quantityItems === 1) {
+      onToggle()
+    }
+  }
   return (
     <ProductContainer>
       <header>
@@ -26,22 +39,28 @@ export function CartProduct({ onToggle }: CartProductProps) {
       </header>
 
       <CartItems>
-        <CartItem>
-          <ProductCartImage>
-            <Image
-              src="https://files.stripe.com/links/MDB8YWNjdF8xUEhyMnZJdU14ZmNMTkF5fGZsX3Rlc3RfMGR3WjFibmdOa3ZrN1Rjcm5XMDluOXZC00FbWbIGop"
-              alt="imagem do item adicionado ao carrinho"
-              width={100}
-              height={100}
-            />
-          </ProductCartImage>
+        {items.map(({ shirt }: item) => {
+          return (
+            <CartItem key={shirt.id}>
+              <ProductCartImage>
+                <Image
+                  src={shirt.imageUrl}
+                  width={100}
+                  height={100}
+                  alt="Imagem do produto colocado no carrinho de compras"
+                />
+              </ProductCartImage>
 
-          <ProductCartDetails>
-            <span>Camiseta Beyond the Limits</span>
-            <strong>R$ 79,90</strong>
-            <button>Remover</button>
-          </ProductCartDetails>
-        </CartItem>
+              <ProductCartDetails>
+                <span>{shirt.name}</span>
+                <strong>{shirt.price}</strong>
+                <button onClick={() => handleRemoveItemCart(shirt.id)}>
+                  Remover
+                </button>
+              </ProductCartDetails>
+            </CartItem>
+          )
+        })}
       </CartItems>
       <PurchaseDetails>
         <div>
@@ -51,12 +70,12 @@ export function CartProduct({ onToggle }: CartProductProps) {
           </Details>
 
           <Details>
-            <span style={{ alignSelf: 'flex-end' }}>3 itens</span>
-            <strong>R$ 270,00</strong>
+            <span style={{ alignSelf: 'flex-end' }}>{quantityItems}</span>
+            <strong>{`R$ ${totalPurchasePrice.toFixed(2)}`}</strong>
           </Details>
         </div>
 
-        <button>Finalizar compra</button>
+        <button disabled={quantityItems === 0}>Finalizar compra</button>
       </PurchaseDetails>
     </ProductContainer>
   )

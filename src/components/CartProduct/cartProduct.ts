@@ -155,7 +155,11 @@ export const PurchaseDetails = styled('div', {
     fontSize: '$md',
     cursor: 'pointer',
 
-    '&:hover': {
+    '&:disabled': {
+      cursor: 'not-allowed',
+    },
+
+    '&:not(:disabled):hover': {
       backgroundColor: '$green300',
     },
   },

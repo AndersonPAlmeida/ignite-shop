@@ -11,6 +11,7 @@ interface ContextCartType {
   addItemCart: (item: Product) => void
   removeItemCart: (item: string) => void
   quantityItems: number
+  totalPurchasePrice: number
 }
 
 export const CartContext = createContext<ContextCartType>({} as ContextCartType)
@@ -36,6 +37,14 @@ export function ProviderContextCart({ children }: ContextCartProps) {
 
   const quantityItems = items.length
 
+  const totalPurchasePrice = items.reduce((total, item) => {
+    const priceString = item.shirt.price
+    const priceNumber = parseFloat(
+      priceString.replace('R$', '').replace(',', '.').trim(),
+    )
+    return (total += priceNumber)
+  }, 0)
+
   return (
     <CartContext.Provider
       value={{
@@ -43,6 +52,7 @@ export function ProviderContextCart({ children }: ContextCartProps) {
         addItemCart,
         removeItemCart,
         quantityItems,
+        totalPurchasePrice,
       }}
     >
       {children}
