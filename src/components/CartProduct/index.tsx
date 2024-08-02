@@ -11,6 +11,8 @@ import {
 import Image from 'next/image'
 import { useCart } from '../../data/hooks/useCart'
 import { CartItem as item } from '../../data/model/CartItem'
+import { useState } from 'react'
+import axios from 'axios'
 
 export interface CartProductProps {
   onToggle: () => void
@@ -18,16 +20,42 @@ export interface CartProductProps {
 
 export function CartProduct({ onToggle }: CartProductProps) {
   const { items, quantityItems, totalPurchasePrice, removeItemCart } = useCart()
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
+    useState(false)
 
   function handleRemoveItemCart(idItem: string) {
     removeItemCart(idItem)
-
-    console.log('itens', quantityItems)
 
     if (quantityItems === 1) {
       onToggle()
     }
   }
+
+  async function handleBuyButton() {
+    try {
+      setIsCreatingCheckoutSession(true)
+
+      const cardProducts = items.map((item) => {
+        return {
+          price: item.shirt.defaultPriceId,
+          quantity: 1,
+        }
+      })
+
+      const response = await axios.post('/api/checkout', {
+        product: cardProducts,
+      })
+
+      const { checkoutUrl } = response.data
+
+      window.location.href = checkoutUrl
+    } catch (err) {
+      setIsCreatingCheckoutSession(false)
+
+      alert('Falha ao redirecionar ao checkout!')
+    }
+  }
+
   return (
     <ProductContainer>
       <header>
@@ -75,7 +103,12 @@ export function CartProduct({ onToggle }: CartProductProps) {
           </Details>
         </div>
 
-        <button disabled={quantityItems === 0}>Finalizar compra</button>
+        <button
+          disabled={quantityItems === 0 || isCreatingCheckoutSession}
+          onClick={handleBuyButton}
+        >
+          Finalizar compra
+        </button>
       </PurchaseDetails>
     </ProductContainer>
   )

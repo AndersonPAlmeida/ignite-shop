@@ -5,27 +5,23 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { priceId } = req.body
-  console.log('=====', priceId)
+  const { product } = req.body
+
+  console.log('====', product)
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed.' })
   }
 
-  if (!priceId) {
-    return res.status(400).json({ error: 'Price not found.' })
+  if (!product) {
+    return res.status(400).json({ error: 'Products not found.' })
   }
 
   const successUrl = `${process.env.NEXT_URL}/success?session_id={CHECKOUT_SESSION_ID}`
   const cancelUrl = `${process.env.NEXT_URL}/`
 
   const checkoutSession = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price: `${priceId}`,
-        quantity: 1,
-      },
-    ],
+    line_items: product,
     mode: 'payment',
     success_url: successUrl,
     cancel_url: cancelUrl,
