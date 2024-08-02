@@ -7,25 +7,28 @@ import Image from 'next/image'
 import Link from 'next/link'
 import logoImg from '../assets/logo.svg'
 import { CartProduct } from '../components/CartProduct'
+import { ProviderContextCart } from '../data/contexts/ContextCart'
 
 globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Container>
-      <Header>
-        <Link href="/">
-          <Image src={logoImg} alt="" />
-        </Link>
-        <Cart variant="cartShopItems">
-          <Bag size={32} weight="bold" />
-          <div>
-            <ItemAddQtd>0</ItemAddQtd>
-          </div>
-        </Cart>
-      </Header>
-      <Component {...pageProps} />
-      <CartProduct />
-    </Container>
+    <ProviderContextCart>
+      <Container>
+        <Header>
+          <Link href="/">
+            <Image src={logoImg} alt="" />
+          </Link>
+          <Cart variant="cartShopItems">
+            <Bag size={32} weight="bold" />
+            <div>
+              <ItemAddQtd>0</ItemAddQtd>
+            </div>
+          </Cart>
+        </Header>
+        <Component {...pageProps} />
+        <CartProduct />
+      </Container>
+    </ProviderContextCart>
   )
 }

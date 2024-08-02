@@ -10,6 +10,7 @@ import 'keen-slider/keen-slider.min.css'
 import Head from 'next/head'
 import { Cart } from '../styles/pages/cart'
 import { Bag } from '@phosphor-icons/react'
+// import { useCart } from '../data/hooks/useCart'
 
 interface HomeProps {
   products: {
@@ -27,6 +28,8 @@ export default function Home({ products }: HomeProps) {
     },
   })
 
+  // const { items } = useCart()
+
   return (
     <>
       <Head>
@@ -34,6 +37,8 @@ export default function Home({ products }: HomeProps) {
       </Head>
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map((product) => {
+          console.log(product)
+
           return (
             <Product
               key={product.id}
