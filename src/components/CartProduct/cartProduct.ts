@@ -2,7 +2,7 @@ import { styled } from '../../styles'
 
 export const ProductContainer = styled('div', {
   width: '30rem',
-  minHeight: '100vh',
+  height: '100vh',
   backgroundColor: '$gray800',
 
   position: 'absolute',

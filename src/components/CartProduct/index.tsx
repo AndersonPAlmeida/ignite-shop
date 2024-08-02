@@ -7,16 +7,20 @@ import {
   ProductCartImage,
   ProductContainer,
   PurchaseDetails,
-} from './produto'
+} from './cartProduct'
 import Image from 'next/image'
 
-export function CartProduct() {
+export interface CartProductProps {
+  onToggle: () => void
+}
+
+export function CartProduct({ onToggle }: CartProductProps) {
   return (
     <ProductContainer>
       <header>
         <h2>Sacola de compras</h2>
 
-        <button>
+        <button onClick={onToggle}>
           <X size={26} weight="bold" />
         </button>
       </header>
