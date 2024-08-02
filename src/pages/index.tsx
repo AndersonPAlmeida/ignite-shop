@@ -8,7 +8,7 @@ import Image from 'next/image'
 
 import 'keen-slider/keen-slider.min.css'
 import Head from 'next/head'
-import { Cart } from '../styles/pages/cart'
+import { Cart } from '../components/Cart'
 import { Bag } from '@phosphor-icons/react'
 import { useCart } from '../data/hooks/useCart'
 import { Product as Shirt } from '../data/model/Product'
