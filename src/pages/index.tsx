@@ -10,7 +10,8 @@ import 'keen-slider/keen-slider.min.css'
 import Head from 'next/head'
 import { Cart } from '../styles/pages/cart'
 import { Bag } from '@phosphor-icons/react'
-// import { useCart } from '../data/hooks/useCart'
+import { useCart } from '../data/hooks/useCart'
+import { Product as Shirt } from '../data/model/Product'
 
 interface HomeProps {
   products: {
@@ -28,7 +29,11 @@ export default function Home({ products }: HomeProps) {
     },
   })
 
-  // const { items } = useCart()
+  const { addItemCart } = useCart()
+
+  function handleAddItemCartButton(item: Shirt) {
+    addItemCart(item)
+  }
 
   return (
     <>
@@ -37,8 +42,6 @@ export default function Home({ products }: HomeProps) {
       </Head>
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map((product) => {
-          console.log(product)
-
           return (
             <Product
               key={product.id}
@@ -53,7 +56,13 @@ export default function Home({ products }: HomeProps) {
                   <strong>{product.name}</strong>
                   <span>{product.price}</span>
                 </ItemDetails>
-                <Cart variant="shopItemAdd">
+                <Cart
+                  variant="shopItemAdd"
+                  onClick={(event) => {
+                    event.preventDefault()
+                    handleAddItemCartButton(product)
+                  }}
+                >
                   <Bag size={32} weight="bold" />
                 </Cart>
               </footer>

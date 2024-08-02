@@ -14,20 +14,8 @@ interface ContextCartType {
 
 export const CartContext = createContext<ContextCartType>({} as ContextCartType)
 
-// Item específico para inicializar o estado
-const initialProduct: Product = {
-  id: '1',
-  name: 'Camiseta',
-  imageUrl: 'https://example.com/image.jpg',
-  price: '29.99',
-}
-
-const initialCartItem: CartItem = {
-  shirt: initialProduct,
-}
-
 export function ProviderContextCart({ children }: ContextCartProps) {
-  const [items, setItems] = useState<CartItem[]>([initialCartItem])
+  const [items, setItems] = useState<CartItem[]>([])
 
   function addItemCart(shirt: Product) {
     const index = items.findIndex((object) => object.shirt.id === shirt.id)

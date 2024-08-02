@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </Cart>
         </Header>
         <Component {...pageProps} />
-        <CartProduct />
+        {/* <CartProduct /> */}
       </Container>
     </ProviderContextCart>
   )
