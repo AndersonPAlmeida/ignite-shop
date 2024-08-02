@@ -10,6 +10,7 @@ interface ContextCartType {
   items: CartItem[]
   addItemCart: (item: Product) => void
   removeItemCart: (item: string) => void
+  quantityItems: number
 }
 
 export const CartContext = createContext<ContextCartType>({} as ContextCartType)
@@ -33,12 +34,15 @@ export function ProviderContextCart({ children }: ContextCartProps) {
     setItems([...newItems])
   }
 
+  const quantityItems = items.length
+
   return (
     <CartContext.Provider
       value={{
         items,
         addItemCart,
         removeItemCart,
+        quantityItems,
       }}
     >
       {children}
